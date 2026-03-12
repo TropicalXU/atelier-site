@@ -1,26 +1,43 @@
+/* globals.css
+ *
+ * This is the foundation CSS file for the entire site.
+ * It does three things:
+ *   1. Imports Tailwind CSS (so all Tailwind classes work)
+ *   2. Maps your custom Google Fonts to Tailwind utilities
+ *   3. Sets a few base styles that apply everywhere
+ *
+ * You rarely need to edit this file directly.
+ */
+
 @import "tailwindcss";
 
+/* ─── Font Mapping ─────────────────────────────────────────────────────────
+ *
+ * The fonts are loaded in layout.tsx via next/font/google,
+ * which creates CSS variables:  --font-inter  and  --font-playfair
+ *
+ * Here we tell Tailwind to use those variables when you write:
+ *   font-sans   →  Inter (for body text, labels, buttons)
+ *   font-serif  →  Playfair Display (for headlines)
+ */
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+}
+
+/* ─── Base Styles ──────────────────────────────────────────────────────────
+ *
+ * These apply to every element on the site.
+ */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground: #0a0a0a;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Makes text look sharper on screens */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
